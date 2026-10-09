@@ -1,0 +1,67 @@
+==============================================================================
+f(x) = x2   [bias of the mean is exactly +sigma^2]
+input: poisson, mu = 9, sigma = 3, sigma/|mu| = 0.333, N = 100000
+                                       mean(y)              sigma(y)
+toys, y = f(x)                90.025 +- 0.18         58.316 +- 0.2    
+exact (numerical)                           90                58.404
+toys, y_lin                   81.036 +- 0.17         53.965 +- 0.12   
+linear propagation                          81                    54
+pulls (toy - prediction)/err:
+  f(x) toys vs linear : mean    +48.94   sigma    +21.22
+  f(x) toys vs exact  : mean     +0.13   sigma     -0.43
+  y_lin toys vs linear: mean     +0.21   sigma     -0.28
+figure: plots/poisson_x2.png
+==============================================================================
+f(x) = inv   [e.g. momentum from curvature; E[1/x] diverges if f_X(0) > 0]
+input: poisson, mu = 9, sigma = 3, sigma/|mu| = 0.333, N = 100000
+  WARNING: x outside the domain of f, dropped: toys 9.00e-05, exact 1.23e-04
+                                       mean(y)              sigma(y)
+toys, y = f(x)               0.12776 +- 0.0002     0.063286 +- 0.0007 
+exact (numerical)                      0.12776              0.063013
+toys, y_lin                  0.11115 +- 0.00012    0.036871 +- 8.5e-05
+linear propagation                     0.11111              0.037037
+pulls (toy - prediction)/err:
+  f(x) toys vs linear : mean    +83.18   sigma    +37.47
+  f(x) toys vs exact  : mean     +0.00   sigma     +0.39
+  y_lin toys vs linear: mean     +0.31   sigma     -1.95
+figure: plots/poisson_inv.png
+==============================================================================
+f(x) = sqrt   [e.g. amplitude from a counted rate]
+input: poisson, mu = 9, sigma = 3, sigma/|mu| = 0.333, N = 100000
+                                       mean(y)              sigma(y)
+toys, y = f(x)                2.9575 +- 0.0016      0.51462 +- 0.0012 
+exact (numerical)                       2.9558               0.51285
+toys, y_lin                    3.002 +- 0.0016      0.50193 +- 0.0012 
+linear propagation                           3                   0.5
+pulls (toy - prediction)/err:
+  f(x) toys vs linear : mean    -26.09   sigma    +11.82
+  f(x) toys vs exact  : mean     +1.05   sigma     +1.43
+  y_lin toys vs linear: mean     +1.25   sigma     +1.66
+figure: plots/poisson_sqrt.png
+==============================================================================
+f(x) = log   [bias ~ -sigma^2/(2 mu^2) at second order]
+input: poisson, mu = 9, sigma = 3, sigma/|mu| = 0.333, N = 100000
+  WARNING: x outside the domain of f, dropped: toys 1.80e-04, exact 1.23e-04
+                                       mean(y)              sigma(y)
+toys, y = f(x)                2.1359 +- 0.0012      0.36944 +- 0.0011 
+exact (numerical)                       2.1354               0.36962
+toys, y_lin                   2.1977 +- 0.0011      0.33395 +- 0.00077
+linear propagation                      2.1972               0.33333
+pulls (toy - prediction)/err:
+  f(x) toys vs linear : mean    -52.52   sigma    +31.53
+  f(x) toys vs exact  : mean     +0.41   sigma     -0.16
+  y_lin toys vs linear: mean     +0.42   sigma     +0.80
+figure: plots/poisson_log.png
+==============================================================================
+f(x) = exp   [Gaussian x -> log-normal y]
+input: poisson, mu = 9, sigma = 3, sigma/|mu| = 0.333, N = 100000
+                                       mean(y)              sigma(y)
+toys, y = f(x)             2.737e+06 +- 4.4e+05  1.3885e+08 +- 3.6e+07
+exact (numerical)                   5.2019e+06             3.039e+12
+toys, y_lin                   8051.6 +- 77            24312 +- 56     
+linear propagation                      8103.1                 24309
+pulls (toy - prediction)/err:
+  f(x) toys vs linear : mean     +6.22   sigma     +3.83
+  f(x) toys vs exact  : mean     -5.61   sigma -83816.39
+  y_lin toys vs linear: mean     -0.67   sigma     +0.05
+figure: plots/poisson_exp.png
