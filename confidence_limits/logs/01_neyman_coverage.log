@@ -1,0 +1,27 @@
+== Neyman intervals ==
+Gaussian x = 4.2, sigma = 1, 68.3% CL : [3.200, 5.200]
+Poisson n = 9, 90% central             : [4.695, 15.705]  (book c2: 9 +6.7 -4.3)
+Poisson n = 0, 0.6827 upper limit       : 1.148
+Poisson n = 0, 0.9000 upper limit       : 2.303
+Poisson n = 0, 0.9500 upper limit       : 2.996
+  (68.27% two-sided convention for an empty bin: beta = 0.3173/2 -> 1.841, the 1.8 error bar of book c2)
+
+== Coverage (68.27% nominal) ==
+ lambda  exact-Neyman  toys     naive n+-sqrt(n)  toys
+   0.5   0.9098        0.9093   0.3033            0.2972
+   1.5   0.9344        0.9318   0.7112            0.7137
+   3.0   0.8663        0.8668   0.7169            0.7164
+   5.0   0.7420        0.7430   0.6016            0.6021
+   8.0   0.7884        0.7903   0.6968            0.7006
+  12.0   0.6894        0.6963   0.7437            0.7466
+ min exact coverage over lambda in (0, 15]: Neyman 0.6892, naive 0.0476
+
+== 2D confidence regions (Gaussian estimators, rho = 0.6) ==
+ P(Delta chi2 <= 1.00) toys = 0.3911   exact chi2(2 dof) = 0.3935
+ P(Delta chi2 <= 2.30) toys = 0.6826   exact chi2(2 dof) = 0.6834
+ P(Delta chi2 <= 4.00) toys = 0.8642   exact chi2(2 dof) = 0.8647
+ P(Delta chi2 <= 6.18) toys = 0.9517   exact chi2(2 dof) = 0.9545
+ 1D interval |a_hat - a| <= 1 alone covers 0.6777 (68.27%)
+ -> for a joint 68.3% region in 2D use Delta chi2 = 2.30 (L9 p.21-22; Cowan 9.7)
+
+plots written to plots/01a_neyman_belts.png, 01b_poisson_coverage.png, 01c_2d_regions.png

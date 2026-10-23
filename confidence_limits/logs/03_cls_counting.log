@@ -1,0 +1,56 @@
+== (a,b) counting experiment, b = 3.0, 95% CL ==
+ n_obs = 2: CL_b = 0.4232; UL CL_s+b = 3.296, UL CLs = 4.443
+  n_obs |  CL_s+b UL |   CLs UL  | Bayes flat-prior UL
+     0  |    -0.004  |    2.996  |    2.996
+     1  |     1.744  |    3.643  |    3.643
+     2  |     3.296  |    4.443  |    4.443
+     3  |     4.754  |    5.395  |    5.395
+     4  |     6.154  |    6.480  |    6.480
+     5  |     7.513  |    7.663  |    7.663
+     6  |     8.842  |    8.904  |    8.904
+     7  |    10.148  |   10.171  |   10.171
+     8  |    11.435  |   11.442  |   11.442
+     9  |    12.705  |   12.707  |   12.707
+    10  |    13.962  |   13.963  |   13.963
+  -> CLs = Bayes(flat prior on s) for every n and b; for n = 0 both give 2.996 whatever b is.
+
+== (c) b = 3.0: P(exclude s | b only) ==
+  s =  0.01: CL_s+b 0.0498   CLs 0.0000
+  s =  0.50: CL_s+b 0.0498   CLs 0.0000
+  s =  1.00: CL_s+b 0.0498   CLs 0.0000
+  s =  2.00: CL_s+b 0.1991   CLs 0.0000
+  s =  4.00: CL_s+b 0.4232   CLs 0.1991
+  s =  6.00: CL_s+b 0.6472   CLs 0.6472
+  coverage of the CLs limit, P(s_true <= s_up):
+  s_true =  0.0: CLs 1.0000   CL_s+b 0.9502  (nominal 0.95)
+  s_true =  1.0: CLs 1.0000   CL_s+b 0.9817  (nominal 0.95)
+  s_true =  3.0: CLs 0.9975   CL_s+b 0.9826  (nominal 0.95)
+  s_true =  6.0: CLs 0.9788   CL_s+b 0.9788  (nominal 0.95)
+  s_true = 10.0: CLs 0.9741   CL_s+b 0.9741  (nominal 0.95)
+
+== (d) expected 95% CLs limits: b-only toys (20000) vs asymptotic ==
+ b = 3
+   quantile        0.025    0.160    0.500    0.840    0.975
+   toys            2.996    3.643    5.395    7.663   10.171
+   asymptotic      2.208    3.151    4.779    7.468   11.386
+   mean of toys 5.560; with only integer n the toy limit is discrete
+ b = 100
+   quantile        0.025    0.160    0.500    0.840    0.975
+   toys           11.597   15.289   21.374   29.765   39.778
+   asymptotic     10.890   14.792   20.900   29.805   41.145
+   mean of toys 22.576; with only integer n the toy limit is discrete
+
+== (e) Combine lhcClsByHand.cxx: N_obs = 4, B = 3.26, lnN kappa = 1.2353 on B ==
+ best fit: r_hat = 0.740, theta_hat = 0.000
+ r = 1: q~_obs = 0.0146; toys (10000): p_mu = 0.4901, 1-p_b = 0.6775, CLs = 0.7234 +- 0.0089
+        asymptotic: p_mu = 0.4519, 1-p_b = 0.6410, CLs = 0.7050
+ 95% CL limit on r: toys 6.00, asymptotic 5.82
+   expected (toys, from grid)   : 0.025: 2.98, 0.160: 3.91, 0.500: 5.15, 0.840: 7.20, 0.975: 9.77
+   expected (asymptotic)        : -2s: 2.38, -1s: 3.36, +0s: 5.05, +1s: 7.81, +2s: 11.80
+   no-systematic reference      : CLs UL (n=4, b=3.26) = 6.31
+   kappa -> 1.001, r = 6: toy CLs = 0.0489  vs stat-only P(n<=4|9.26)/P(n<=4|3.26) = 0.0608
+   -> any continuous global observable breaks the ties between toys with n = n_obs,
+      so the toy p-values become ~P(n<n_obs) + P(n=n_obs)/2 ('mid-p') instead of
+      P(n<=n_obs): the stat-only discrete CLs limit is conservative.
+
+plots written to plots/03a_cls_counting.png, 03b_expected_limits_counting.png, 03c_cls_by_hand.png
